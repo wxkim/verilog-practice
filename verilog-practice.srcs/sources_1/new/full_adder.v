@@ -28,6 +28,8 @@ module full_adder_1B(
     output sum
     );
     
+    wire half_sum, overflow_add, overflow_carry;
+    
     assign half_sum = a ^ b;
     assign overflow_add = a & b;
     assign overflow_carry = cin & half_sum;
