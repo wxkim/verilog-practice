@@ -21,31 +21,26 @@
 
 
 module s4bit_comparator(
-    input [3:0] a,
-    input [3:0] b,
-    output le, // a < b
-    output eq, // a = b
-    output ge // a > b
-    );
-    
-    wire c_out;
+    input  [3:0] a,
+    input  [3:0] b,
+    output       lt, // a < b
+    output       eq, // a == b
+    output       gt  // a > b
+);
 
-    assign b_comp = ~b;  
+    wire [3:0] sum;
+    wire       borrow;
 
     s4bit_subtractor _subtractor (
-        .a     (a),
-        .b     (b),  
-        .sum   (sum),
+        .a(a),
+        .b(b),
+        .sum(sum),
         .borrow(borrow)
     );
-    
-    assign borrow = ~c_out;
-    
-    assign eq = (sum == 4'b0000);
 
-    assign le = borrow | eq;
+    assign eq = (sum == 4'b0000);       // equal
+    assign lt = borrow;                 // less than
+    assign gt = ~borrow & ~eq;          // greater than
 
-    assign ge = ~borrow;
-    
-    
 endmodule
+

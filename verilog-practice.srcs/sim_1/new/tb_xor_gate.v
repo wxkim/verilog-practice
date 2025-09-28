@@ -28,7 +28,7 @@ module tb_xor_gate(
     reg b;
     wire z;
     
-    xor_gate UUT (.a(a), .b(b), .c(c));
+    xor_gate UUT (.a(a), .b(b), .z(z));
     
     initial
     

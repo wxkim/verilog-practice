@@ -23,8 +23,8 @@
 module half_adder(
     input a,
     input b,
-    input carry_out,
-    input sum
+    output carry_out,
+    output sum
     );
     
     assign sum = a ^ b;
