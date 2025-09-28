@@ -23,8 +23,8 @@
 module s4bit_subtractor(
     input [3:0] a,
     input [3:0] b,
-    input [3:0] sum,
-    output cout
+    output [3:0] sum,
+    output borrow
     );
     
     wire [3:0] b_comp;
@@ -40,5 +40,5 @@ module s4bit_subtractor(
         .c_out (c_out)
     );
 
-    assign b_out = ~c_out;
+    assign borrow = ~c_out; //underflow detection
 endmodule

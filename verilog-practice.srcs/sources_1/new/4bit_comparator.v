@@ -23,7 +23,29 @@
 module s4bit_comparator(
     input [3:0] a,
     input [3:0] b,
-    input [3:0] sum,
-    output cout
+    output le, // a < b
+    output eq, // a = b
+    output ge // a > b
     );
+    
+    wire c_out;
+
+    assign b_comp = ~b;  
+
+    s4bit_subtractor _subtractor (
+        .a     (a),
+        .b     (b),  
+        .sum   (sum),
+        .borrow(borrow)
+    );
+    
+    assign borrow = ~c_out;
+    
+    assign eq = (sum == 4'b0000);
+
+    assign le = borrow | eq;
+
+    assign ge = ~borrow;
+    
+    
 endmodule
